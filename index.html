@@ -3,55 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASOGAM</title>
+    <meta name="description" content="Asociación de Desarrollo Integral de Gamonales — ASOGAM. Una asociación con propósito en Gamonales, Ciudad Quesada, San Carlos.">
+    <title>ASOGAM | Asociación de Desarrollo Integral de Gamonales</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-    <header>
-        <nav>
-            <img src="img/logo.png" alt="Logo ASOGAM">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#quienes-somos">Quiénes somos</a></li>
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+    
+    <div class="banner-bienvenida" id="bannerBienvenida" role="region" aria-label="Mensaje de bienvenida">
+        <p class="banner-texto">
+            👋 ¡Bienvenido a ASOGAM! Conocé el trabajo que hacemos por nuestra comunidad en Gamonales.
+        </p>
+        <button class="banner-cerrar" id="bannerCerrar" aria-label="Cerrar mensaje de bienvenida">✕</button>
+    </div>
+
+
+    
+    <header class="encabezado">
+        <nav class="navegacion" aria-label="Menú principal">
+
+            <div class="nav-logo">
+                <img src="img/logo.png"
+                     alt="Logo de ASOGAM, Asociación de Desarrollo Integral de Gamonales"
+                     class="nav-logo-img" width="42" height="42">
+                <span class="nav-nombre">ASOGAM</span>
+            </div>
+
+            <button class="nav-menu-btn" id="menuBtn"
+                    aria-label="Abrir menú de navegación"
+                    aria-expanded="false"
+                    aria-controls="navLinks">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+
+            <ul class="nav-links" id="navLinks" role="list">
+                <li><a href="#inicio"          class="nav-link">Inicio</a></li>
+                <li><a href="#quienes-somos"   class="nav-link">Quiénes somos</a></li>
+                <li><a href="#ejes-de-trabajo" class="nav-link">Ejes de trabajo</a></li>
+                <li><a href="#proyectos"       class="nav-link">Proyectos</a></li>
+                <li><a href="#unete"           class="nav-link">Únete</a></li>
+                <li><a href="#contacto"        class="nav-link">Contacto</a></li>
             </ul>
+
         </nav>
     </header>
 
+
     <main>
 
-        <section id="inicio">
-            <h1>Asociación de Desarrollo Integral de Gamonales</h1>
-            <p>Construyendo comunidad con propósito.</p>
+        
+        <section id="inicio" class="seccion-hero" aria-label="Bienvenida a ASOGAM">
+            <div class="hero-overlay">
+                <div class="hero-contenido">
+                    <span class="hero-badge">Gamonales, Ciudad Quesada, San Carlos</span>
+                    <h1 class="hero-titulo">
+                        Asociación de Desarrollo Integral de Gamonales
+                    </h1>
+                    <p class="hero-descripcion">
+                        Impulsar el cambio real en nuestra comunidad, eligiendo ser diferentes
+                        dando voz a cada persona. Decidimos en comunidad y construimos con
+                        nuestras propias manos — una
+                        <strong class="hero-destacado">"asociación con propósito"</strong>.
+                    </p>
+                    <div class="hero-botones">
+                        <a href="#proyectos" class="btn-primario">Conocé nuestro trabajo</a>
+                        <a href="#unete"     class="btn-secundario">Únete a nosotros</a>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="quienes-somos">
-            <h2>Quiénes somos</h2>
-            <p>
-                Somos una asociación comprometida con el desarrollo
-                y bienestar de la comunidad de Gamonales.
-            </p>
+
+        
+        <section id="quienes-somos" class="seccion" aria-labelledby="titulo-quienes">
+            <div class="contenedor">
+                <div class="quienes-grid">
+
+                    <div class="quienes-texto">
+                        <span class="etiqueta-seccion">Quiénes somos</span>
+                        <h2 id="titulo-quienes">Comprometidos con el desarrollo de nuestra comunidad</h2>
+                        <p>Nuestra asociación nació hace dos años gracias a la iniciativa de personas comprometidas con el bienestar y desarrollo de la comunidad. Trabajamos para impulsar proyectos que respondan a las necesidades de las familias, promoviendo la participación, la colaboración y el crecimiento colectivo.</p>
+                        <p>Creemos que el progreso se construye juntos, fortaleciendo una comunidad más unida, inclusiva y llena de oportunidades.</p>
+                        <div class="estadisticas" role="list" aria-label="Cifras de la asociación">
+                            <div class="estadistica" role="listitem">
+                                <span class="estadistica-numero">2</span>
+                                <span class="estadistica-label">Años activos</span>
+                            </div>
+                            <div class="estadistica" role="listitem">
+                                <span class="estadistica-numero">4</span>
+                                <span class="estadistica-label">Proyectos destacados</span>
+                            </div>
+                            <div class="estadistica" role="listitem">
+                                <span class="estadistica-numero">4</span>
+                                <span class="estadistica-label">Ejes de trabajo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="quienes-imagen-wrap">
+                        <img src="img/comunidad.jpeg"
+                             alt="Miembros de ASOGAM pintando señalización vial en las calles de Gamonales"
+                             class="img-comunidad" loading="lazy">
+                    </div>
+
+                </div>
+            </div>
         </section>
 
-        <section id="proyectos">
-            <h2>Proyectos</h2>
-            <p>Próximamente se mostrarán nuestros proyectos.</p>
+
+        
+        <section id="ejes-de-trabajo" class="seccion seccion-verde" aria-labelledby="titulo-ejes">
+            <div class="contenedor">
+                <span class="etiqueta-seccion">Ejes de trabajo</span>
+                <h2 id="titulo-ejes">Áreas en las que trabajamos</h2>
+
+                <div class="ejes-grid">
+
+                    <article class="eje-card" aria-label="Eje de Seguridad Comunitaria">
+                        <img src="img/eje_seguridad.jpg"
+                             alt="Ícono de Seguridad Comunitaria"
+                             class="eje-img" loading="lazy">
+                        <h3 class="eje-titulo">Seguridad Comunitaria</h3>
+                        <p class="eje-descripcion">Promovemos acciones que fortalecen la seguridad y el bienestar de los vecinos, impulsando iniciativas de prevención y vigilancia comunitaria.</p>
+                    </article>
+
+                    <article class="eje-card" aria-label="Eje de Gestión Ambiental">
+                        <img src="img/eje_ambiente.jpg"
+                             alt="Ícono de Gestión Ambiental"
+                             class="eje-img" loading="lazy">
+                        <h3 class="eje-titulo">Gestión Ambiental</h3>
+                        <p class="eje-descripcion">Trabajamos por la conservación y el mantenimiento de los espacios comunales, fomentando una comunidad limpia, saludable y comprometida con el ambiente.</p>
+                    </article>
+
+                    <article class="eje-card" aria-label="Eje de Desarrollo Social">
+                        <img src="img/eje_social.jpg"
+                             alt="Ícono de Desarrollo Social"
+                             class="eje-img" loading="lazy">
+                        <h3 class="eje-titulo">Desarrollo Social</h3>
+                        <p class="eje-descripcion">Apoyamos a las familias y grupos más vulnerables mediante proyectos solidarios que contribuyen a mejorar su calidad de vida.</p>
+                    </article>
+
+                    <article class="eje-card" aria-label="Eje de Cultura, Recreación y Deporte">
+                        <img src="img/eje_cultura.jpg"
+                             alt="Ícono de Cultura, Recreación y Deporte"
+                             class="eje-img" loading="lazy">
+                        <h3 class="eje-titulo">Cultura, Recreación y Deporte</h3>
+                        <p class="eje-descripcion">Impulsamos actividades culturales, recreativas y deportivas que fortalecen la convivencia, la participación y el sentido de comunidad.</p>
+                    </article>
+
+                </div>
+            </div>
         </section>
 
-        <section id="contacto">
-            <h2>Contacto</h2>
-            <p>Información de contacto de la asociación.</p>
+
+        
+        <section id="proyectos" class="seccion" aria-labelledby="titulo-proyectos">
+            <div class="contenedor">
+                <span class="etiqueta-seccion">Proyectos</span>
+                <h2 id="titulo-proyectos">Lo que hemos logrado juntos</h2>
+
+                <div class="proyectos-grid">
+
+                    
+                    <article class="proyecto-card">
+                        <div class="proyecto-slider" data-proyecto="0">
+                            <div class="proyecto-imagenes">
+                                <img src="img/proyecto_1.jpeg"
+                                     alt="Instalación de cámara de vigilancia en Gamonales"
+                                     class="proyecto-imagen activa" loading="lazy">
+                                <img src="img/proyecto_1_2.jpeg"
+                                     alt="Vista de la cámara de vigilancia instalada"
+                                     class="proyecto-imagen" loading="lazy">
+                            </div>
+                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                            </div>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-etiqueta etiqueta-seguridad">Seguridad</span>
+                            <h3 class="proyecto-titulo">Cámara de Vigilancia</h3>
+                            <p class="proyecto-descripcion">Se instaló un sistema de cámaras de vigilancia para fortalecer la seguridad y brindar mayor tranquilidad a los vecinos de la comunidad.</p>
+                        </div>
+                    </article>
+
+                    
+                    <article class="proyecto-card">
+                        <div class="proyecto-slider" data-proyecto="1">
+                            <div class="proyecto-imagenes">
+                                <img src="img/proyecto_2.jpeg"
+                                     alt="Parquecito recreativo con juegos infantiles en Gamonales"
+                                     class="proyecto-imagen activa" loading="lazy">
+                                <img src="img/proyecto_2_2.jpeg"
+                                     alt="Anuncio de reapertura del parquecito de Gamonales"
+                                     class="proyecto-imagen" loading="lazy">
+                            </div>
+                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                            </div>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-etiqueta etiqueta-recreacion">Recreación</span>
+                            <h3 class="proyecto-titulo">Parquecito</h3>
+                            <p class="proyecto-descripcion">Se desarrolló y acondicionó un espacio recreativo para el disfrute de niños y familias, contribuyendo a una comunidad más agradable y segura.</p>
+                        </div>
+                    </article>
+
+                    
+                    <article class="proyecto-card">
+                        <div class="proyecto-slider" data-proyecto="2">
+                            <div class="proyecto-imagenes">
+                                <img src="img/proyecto_3.jpeg"
+                                     alt="Rótulo de bienvenida al barrio Gamonales"
+                                     class="proyecto-imagen activa" loading="lazy">
+                                <img src="img/proyecto_3_2.jpeg"
+                                     alt="Rotulación de sectores del barrio: Los Maderos y La Hacienda"
+                                     class="proyecto-imagen" loading="lazy">
+                            </div>
+                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                            </div>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-etiqueta etiqueta-infraestructura">Infraestructura</span>
+                            <h3 class="proyecto-titulo">Rotulación</h3>
+                            <p class="proyecto-descripcion">Se implementó la rotulación de la comunidad y sus diferentes sectores, facilitando la identificación y ubicación de sus espacios.</p>
+                        </div>
+                    </article>
+
+                    
+                    <article class="proyecto-card">
+                        <div class="proyecto-slider" data-proyecto="3">
+                            <div class="proyecto-imagenes">
+                                <img src="img/proyecto_4.jpg"
+                                     alt="Edificio comunal de ASOGAM en Gamonales"
+                                     class="proyecto-imagen activa" loading="lazy">
+                                <img src="img/proyecto_4_2.png"
+                                     alt="Vista frontal del edificio comunal de la asociación"
+                                     class="proyecto-imagen" loading="lazy">
+                            </div>
+                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                            </div>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-etiqueta etiqueta-comunal">Comunal</span>
+                            <h3 class="proyecto-titulo">Edificio Comunal</h3>
+                            <p class="proyecto-descripcion">Se adquirió un edificio comunal destinado a reuniones, actividades y proyectos en beneficio de toda la comunidad.</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+
+        
+        <section id="unete" class="seccion seccion-verde" aria-labelledby="titulo-unete">
+            <div class="contenedor">
+                <span class="etiqueta-seccion">Únete y colabora</span>
+                <h2 id="titulo-unete">Sé parte del cambio en tu comunidad</h2>
+
+                <div class="unete-grid">
+
+                    
+                    <div class="unete-imagen-wrap">
+                        <img src="img/reuniones.png"
+                             alt="Ilustración de personas reunidas trabajando en comunidad"
+                             class="unete-imagen" loading="lazy">
+                    </div>
+
+                    
+                    <div class="unete-contenido">
+
+                        <div class="unete-card">
+                            <h3 class="unete-card-titulo">¿Cómo puedo unirme?</h3>
+                            <p>Podés formar parte de la asociación como afiliado. Solo necesitás ser vecino de la comunidad, tener 12 años o más y presentar una solicitud ante la Junta Directiva.</p>
+                        </div>
+
+                        <div class="unete-card">
+                            <h3 class="unete-card-titulo">¿Cómo puedo colaborar?</h3>
+                            <p>Buscamos vecinos comprometidos que deseen apoyar iniciativas comunitarias, actividades sociales, proyectos ambientales y acciones para el bienestar de la comunidad.</p>
+                        </div>
+
+                        <div class="unete-card">
+                            <h3 class="unete-card-titulo">¿Realizan reuniones?</h3>
+                            <p>Los afiliados participan en las asambleas anuales de la asociación. Las reuniones periódicas son realizadas por la Junta Directiva, y próximamente se busca implementar encuentros vecinales para informar sobre proyectos y fomentar la participación de la comunidad.</p>
+                        </div>
+
+                        <a href="mailto:asogan2024@gmail.com?subject=Quiero unirme a ASOGAM"
+                           class="btn-unete">
+                            Escribirnos para unirme
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+        <section id="contacto" class="seccion" aria-labelledby="titulo-contacto">
+            <div class="contenedor">
+                <span class="etiqueta-seccion">Contacto</span>
+                <h2 id="titulo-contacto">Ponerse en contacto</h2>
+                <p class="contacto-intro">¿Tenés alguna consulta o querés saber más sobre nuestro trabajo? Escribinos directamente.</p>
+
+                <div class="contacto-grid">
+
+                    <div class="info-item">
+                        <div class="info-icono" aria-hidden="true">📍</div>
+                        <div>
+                            <p class="info-titulo">Ubicación</p>
+                            <p class="info-texto">Barrio Gamonales, Ciudad Quesada, San Carlos</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icono" aria-hidden="true">📞</div>
+                        <div>
+                            <p class="info-titulo">Teléfono</p>
+                            <a href="tel:+50683886418" class="info-enlace">8388-6418</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icono" aria-hidden="true">✉️</div>
+                        <div>
+                            <p class="info-titulo">Correo electrónico</p>
+                            <a href="mailto:asogan2024@gmail.com" class="info-enlace">asogan2024@gmail.com</a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="info-item">
+                        <div class="info-icono info-icono-facebook" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                                <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="info-titulo">Facebook</p>
+                            <a href="https://www.facebook.com/profile.php?id=61578971403743"
+                               class="info-enlace"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Visitar la página de Facebook de ASOGAM (se abre en nueva ventana)">
+                                ASOGAM en Facebook
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                
+                <div class="contacto-cta">
+                    <a href="mailto:asogan2024@gmail.com?subject=Contacto desde la página web de ASOGAM"
+                       class="btn-primario-grande">
+                        ✉️ Escribirnos al correo
+                    </a>
+                </div>
+
+            </div>
         </section>
 
     </main>
 
-    <footer>
-        <p>© 2025 ASOGAM</p>
+
+    
+    <footer class="pie-pagina" role="contentinfo">
+        <div class="contenedor">
+            <div class="footer-grid">
+
+                <div class="footer-info">
+                    <img src="img/logo.png" alt="Logo ASOGAM" class="footer-logo" width="50" height="50">
+                    <p class="footer-nombre">ASOGAM</p>
+                    <p class="footer-descripcion">Asociación de Desarrollo Integral de Gamonales,<br>Ciudad Quesada, San Carlos.</p>
+                </div>
+
+                <nav class="footer-nav" aria-label="Navegación del pie de página">
+                    <ul role="list">
+                        <li><a href="#inicio"          class="footer-link">Inicio</a></li>
+                        <li><a href="#quienes-somos"   class="footer-link">Quiénes somos</a></li>
+                        <li><a href="#ejes-de-trabajo" class="footer-link">Ejes de trabajo</a></li>
+                        <li><a href="#proyectos"       class="footer-link">Proyectos</a></li>
+                        <li><a href="#unete"           class="footer-link">Únete</a></li>
+                        <li><a href="#contacto"        class="footer-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+            <div class="footer-copy">
+                <p>© 2025 ASOGAM · Asociación de Desarrollo Integral de Gamonales · Todos los derechos reservados</p>
+            </div>
+        </div>
     </footer>
 
     <script src="js/main.js"></script>
-
 </body>
 </html>
