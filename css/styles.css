@@ -1,3 +1,26 @@
+/* =============================================
+   ASOGAM — Asociación de Desarrollo Integral de Gamonales
+   Archivo: css/styles.css
+
+   ÍNDICE:
+   1.  Variables
+   2.  Reset y base
+   3.  Contenedor
+   4.  Tipografía
+   5.  Banner de bienvenida (localStorage)
+   6.  Navegación              ← FLEXBOX
+   7.  Secciones base
+   8.  Hero                    ← FLEXBOX
+   9.  Quiénes somos           ← CSS GRID + efecto cuadro inclinado
+   10. Ejes de trabajo         ← CSS GRID (4 cols)
+   11. Proyectos + slider      ← CSS GRID (2×2)
+   12. Únete y colabora        ← CSS GRID
+   13. Contacto                ← CSS GRID
+   14. Footer                  ← CSS GRID
+   15. Media queries           ← 768px y 480px
+   ============================================= */
+
+
 /* ---------------------------------------------
    1. VARIABLES
    --------------------------------------------- */
@@ -412,19 +435,25 @@ p:last-child { margin-bottom: 0; }
     margin-top: 0.3rem;
 }
 
-
+/*
+   EFECTO CUADRO INCLINADO
+   El ::before crea un rectángulo verde decorativo detrás
+   de la imagen, ligeramente rotado, usando CSS puro.
+   position: relative en el padre + z-index posicionan
+   la imagen por delante del cuadro decorativo.
+*/
 .quienes-imagen-wrap {
     position: relative;
     padding: 16px;              /* espacio para que el cuadro trasero se vea */
 }
 
 .quienes-imagen-wrap::before {
-    content: '';                
+    content: '';                /* necesario para que el pseudo-elemento aparezca */
     position: absolute;
-    inset: 0;                   
+    inset: 0;                   /* ocupa todo el contenedor */
     background-color: var(--verde-decorativo);
     border-radius: var(--radio-lg);
-    transform: rotate(-9deg) translateX(-22px); 
+    transform: rotate(-9deg) translateX(-22px); /* más inclinado y desplazado a la izquierda */
     z-index: 0;                 /* queda detrás de la imagen */
 }
 
@@ -719,8 +748,9 @@ p:last-child { margin-bottom: 0; }
     flex-shrink: 0;
 }
 
-
-.info-icono-facebook {
+/* El icono de Facebook y WhatsApp no llevan emoji sino SVG */
+.info-icono-facebook,
+.info-icono-whatsapp {
     font-size: 0;
 }
 
@@ -825,6 +855,11 @@ p:last-child { margin-bottom: 0; }
     .quienes-imagen-wrap { order: -1; }
     .img-comunidad { height: 280px; }
 
+    /* Reducir desplazamiento del cuadro decorativo para que no se corte en móvil */
+    .quienes-imagen-wrap::before {
+        transform: rotate(-9deg) translateX(-10px);
+    }
+
     /* Ejes: 4 cols → 2 cols */
     .ejes-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -857,6 +892,11 @@ p:last-child { margin-bottom: 0; }
 
     .img-comunidad { height: 220px; }
     .proyecto-imagenes { height: 190px; }
+
+    /* Cuadro decorativo mínimo en móvil pequeño */
+    .quienes-imagen-wrap::before {
+        transform: rotate(-6deg) translateX(-6px);
+    }
 
     .banner-bienvenida { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 }
