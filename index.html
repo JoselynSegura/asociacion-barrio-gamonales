@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-CR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,10 @@
 </head>
 <body>
 
-    
+    <!-- =============================================
+         BANNER DE BIENVENIDA — Primera visita
+         Se muestra solo la primera vez (localStorage)
+         ============================================= -->
     <div class="banner-bienvenida" id="bannerBienvenida" role="region" aria-label="Mensaje de bienvenida">
         <p class="banner-texto">
             👋 ¡Bienvenido a ASOGAM! Conocé el trabajo que hacemos por nuestra comunidad en Gamonales.
@@ -22,7 +25,9 @@
     </div>
 
 
-    
+    <!-- =============================================
+         HEADER — Barra de navegación (Flexbox)
+         ============================================= -->
     <header class="encabezado">
         <nav class="navegacion" aria-label="Menú principal">
 
@@ -55,7 +60,9 @@
 
     <main>
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 1: Inicio / Hero
+             ------------------------------------------- -->
         <section id="inicio" class="seccion-hero" aria-label="Bienvenida a ASOGAM">
             <div class="hero-overlay">
                 <div class="hero-contenido">
@@ -78,7 +85,9 @@
         </section>
 
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 2: Quiénes somos
+             ------------------------------------------- -->
         <section id="quienes-somos" class="seccion" aria-labelledby="titulo-quienes">
             <div class="contenedor">
                 <div class="quienes-grid">
@@ -104,7 +113,7 @@
                         </div>
                     </div>
 
-                    
+                    <!-- Imagen con efecto de cuadro inclinado -->
                     <div class="quienes-imagen-wrap">
                         <img src="img/comunidad.jpeg"
                              alt="Miembros de ASOGAM pintando señalización vial en las calles de Gamonales"
@@ -116,7 +125,9 @@
         </section>
 
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 3: Ejes de trabajo — CSS Grid 4 cols
+             ------------------------------------------- -->
         <section id="ejes-de-trabajo" class="seccion seccion-verde" aria-labelledby="titulo-ejes">
             <div class="contenedor">
                 <span class="etiqueta-seccion">Ejes de trabajo</span>
@@ -161,7 +172,10 @@
         </section>
 
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 4: Proyectos — CSS Grid 2×2
+             Cada card tiene 2 imágenes con mini-slider
+             ------------------------------------------- -->
         <section id="proyectos" class="seccion" aria-labelledby="titulo-proyectos">
             <div class="contenedor">
                 <span class="etiqueta-seccion">Proyectos</span>
@@ -169,7 +183,7 @@
 
                 <div class="proyectos-grid">
 
-                    
+                    <!-- Proyecto 1: Cámara de Vigilancia -->
                     <article class="proyecto-card">
                         <div class="proyecto-slider" data-proyecto="0">
                             <div class="proyecto-imagenes">
@@ -192,7 +206,7 @@
                         </div>
                     </article>
 
-                    
+                    <!-- Proyecto 2: Parquecito -->
                     <article class="proyecto-card">
                         <div class="proyecto-slider" data-proyecto="1">
                             <div class="proyecto-imagenes">
@@ -215,7 +229,7 @@
                         </div>
                     </article>
 
-                    
+                    <!-- Proyecto 3: Rotulación -->
                     <article class="proyecto-card">
                         <div class="proyecto-slider" data-proyecto="2">
                             <div class="proyecto-imagenes">
@@ -238,7 +252,7 @@
                         </div>
                     </article>
 
-                    
+                    <!-- Proyecto 4: Edificio Comunal -->
                     <article class="proyecto-card">
                         <div class="proyecto-slider" data-proyecto="3">
                             <div class="proyecto-imagenes">
@@ -266,7 +280,9 @@
         </section>
 
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 5: Únete y colabora
+             ------------------------------------------- -->
         <section id="unete" class="seccion seccion-verde" aria-labelledby="titulo-unete">
             <div class="contenedor">
                 <span class="etiqueta-seccion">Únete y colabora</span>
@@ -274,14 +290,14 @@
 
                 <div class="unete-grid">
 
-                    
+                    <!-- Columna izquierda: imagen -->
                     <div class="unete-imagen-wrap">
                         <img src="img/reuniones.png"
                              alt="Ilustración de personas reunidas trabajando en comunidad"
                              class="unete-imagen" loading="lazy">
                     </div>
 
-                    
+                    <!-- Columna derecha: contenido -->
                     <div class="unete-contenido">
 
                         <div class="unete-card">
@@ -310,7 +326,9 @@
         </section>
 
 
-        
+        <!-- -------------------------------------------
+             SECCIÓN 6: Contacto
+             ------------------------------------------- -->
         <section id="contacto" class="seccion" aria-labelledby="titulo-contacto">
             <div class="contenedor">
                 <span class="etiqueta-seccion">Contacto</span>
@@ -323,15 +341,31 @@
                         <div class="info-icono" aria-hidden="true">📍</div>
                         <div>
                             <p class="info-titulo">Ubicación</p>
-                            <p class="info-texto">Barrio Gamonales, Ciudad Quesada, San Carlos</p>
+                            <a href="https://maps.app.goo.gl/bWpsxkHgPdEkkzcT9"
+                               class="info-enlace"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Ver Barrio Gamonales en Google Maps (se abre en nueva ventana)">
+                                Barrio Gamonales, Ciudad Quesada, San Carlos
+                            </a>
                         </div>
                     </div>
 
                     <div class="info-item">
-                        <div class="info-icono" aria-hidden="true">📞</div>
+                        <div class="info-icono info-icono-whatsapp" aria-hidden="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                                <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                        </div>
                         <div>
-                            <p class="info-titulo">Teléfono</p>
-                            <a href="tel:+50683886418" class="info-enlace">8388-6418</a>
+                            <p class="info-titulo">WhatsApp</p>
+                            <a href="https://wa.me/50683886418"
+                               class="info-enlace"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="Escribir a ASOGAM por WhatsApp (se abre en nueva ventana)">
+                                8388-6418
+                            </a>
                         </div>
                     </div>
 
@@ -343,7 +377,7 @@
                         </div>
                     </div>
 
-                    
+                    <!-- Facebook con logo oficial SVG -->
                     <div class="info-item">
                         <div class="info-icono info-icono-facebook" aria-hidden="true">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
@@ -364,7 +398,7 @@
 
                 </div>
 
-                
+                <!-- Botón principal de contacto -->
                 <div class="contacto-cta">
                     <a href="mailto:asogan2024@gmail.com?subject=Contacto desde la página web de ASOGAM"
                        class="btn-primario-grande">
@@ -378,7 +412,9 @@
     </main>
 
 
-    
+    <!-- =============================================
+         FOOTER
+         ============================================= -->
     <footer class="pie-pagina" role="contentinfo">
         <div class="contenedor">
             <div class="footer-grid">
