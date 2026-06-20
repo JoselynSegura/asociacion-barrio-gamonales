@@ -63,11 +63,11 @@
         <!-- -------------------------------------------
              SECCIÓN 1: Inicio / Hero
              ------------------------------------------- -->
-        <section id="inicio" class="seccion-hero" aria-label="Bienvenida a ASOGAM">
+        <section id="inicio" class="seccion-hero" aria-labelledby="titulo-inicio">
             <div class="hero-overlay">
                 <div class="hero-contenido">
                     <span class="hero-badge">Gamonales, Ciudad Quesada, San Carlos</span>
-                    <h1 class="hero-titulo">
+                    <h1 id="titulo-inicio" class="hero-titulo">
                         Asociación de Desarrollo Integral de Gamonales
                     </h1>
                     <p class="hero-descripcion">
@@ -97,20 +97,22 @@
                         <h2 id="titulo-quienes">Comprometidos con el desarrollo de nuestra comunidad</h2>
                         <p>Nuestra asociación nació hace dos años gracias a la iniciativa de personas comprometidas con el bienestar y desarrollo de la comunidad. Trabajamos para impulsar proyectos que respondan a las necesidades de las familias, promoviendo la participación, la colaboración y el crecimiento colectivo.</p>
                         <p>Creemos que el progreso se construye juntos, fortaleciendo una comunidad más unida, inclusiva y llena de oportunidades.</p>
-                        <div class="estadisticas" role="list" aria-label="Cifras de la asociación">
-                            <div class="estadistica" role="listitem">
-                                <span class="estadistica-numero">2</span>
-                                <span class="estadistica-label">Años activos</span>
+                        <aside aria-label="Cifras de la asociación">
+                            <div class="estadisticas" role="list">
+                                <div class="estadistica" role="listitem">
+                                    <span class="estadistica-numero">2</span>
+                                    <span class="estadistica-label">Años activos</span>
+                                </div>
+                                <div class="estadistica" role="listitem">
+                                    <span class="estadistica-numero">4</span>
+                                    <span class="estadistica-label">Proyectos destacados</span>
+                                </div>
+                                <div class="estadistica" role="listitem">
+                                    <span class="estadistica-numero">4</span>
+                                    <span class="estadistica-label">Ejes de trabajo</span>
+                                </div>
                             </div>
-                            <div class="estadistica" role="listitem">
-                                <span class="estadistica-numero">4</span>
-                                <span class="estadistica-label">Proyectos destacados</span>
-                            </div>
-                            <div class="estadistica" role="listitem">
-                                <span class="estadistica-numero">4</span>
-                                <span class="estadistica-label">Ejes de trabajo</span>
-                            </div>
-                        </div>
+                        </aside>
                     </div>
 
                     <!-- Imagen con efecto de cuadro inclinado -->
@@ -373,7 +375,7 @@
                         <div class="info-icono" aria-hidden="true">✉️</div>
                         <div>
                             <p class="info-titulo">Correo electrónico</p>
-                            <a href="mailto:asogan2024@gmail.com" class="info-enlace">asogan2024@gmail.com</a>
+                            <a href="mailto:asogan2024@gmail.com" class="info-enlace" aria-label="Enviar correo a asogan2024@gmail.com">asogan2024@gmail.com</a>
                         </div>
                     </div>
 
@@ -415,7 +417,7 @@
     <!-- =============================================
          FOOTER
          ============================================= -->
-    <footer class="pie-pagina" role="contentinfo">
+    <footer class="pie-pagina">
         <div class="contenedor">
             <div class="footer-grid">
 
