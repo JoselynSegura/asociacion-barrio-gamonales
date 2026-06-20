@@ -66,25 +66,28 @@ function cambiarSlide(slider, indice) {
  * @param {HTMLElement} slider - el contenedor con data-proyecto
  */
 function configurarSlider(slider) {
-    const imagenes   = slider.querySelectorAll('.proyecto-imagen');
-    const dots       = slider.querySelectorAll('.slider-dot');
+    const imagenes    = slider.querySelectorAll('.proyecto-imagen');
+    const dots        = slider.querySelectorAll('.slider-dot');
     const totalSlides = imagenes.length;
     let indiceActual  = 0;
+    let intervalo;
 
-    // Rotación automática cada INTERVALO_SLIDER milisegundos
-    const intervalo = setInterval(function () {
-        indiceActual = (indiceActual + 1) % totalSlides; // ciclo: 0 → 1 → 0 → 1...
-        cambiarSlide(slider, indiceActual);
-    }, INTERVALO_SLIDER);
+    function iniciarIntervalo() {
+        intervalo = setInterval(function () {
+            indiceActual = (indiceActual + 1) % totalSlides; // ciclo: 0 → 1 → 0 → 1...
+            cambiarSlide(slider, indiceActual);
+        }, INTERVALO_SLIDER);
+    }
 
-    // Clic en los dots: cambio manual de imagen
+    iniciarIntervalo();
+
+    // Clic en los dots: cambio manual + reinicio del intervalo automático
     dots.forEach(function (dot) {
         dot.addEventListener('click', function () {
-            indiceActual = parseInt(dot.getAttribute('data-index'));
+            indiceActual = parseInt(dot.getAttribute('data-index'), 10);
             cambiarSlide(slider, indiceActual);
-
-            // Reiniciar el intervalo para que no cambie justo después del clic
             clearInterval(intervalo);
+            iniciarIntervalo();
         });
     });
 }
@@ -132,14 +135,15 @@ document.addEventListener('click', function (evento) {
    Detecta qué sección es visible y resalta el link.
    ----------------------------------------------- */
 
-const secciones = document.querySelectorAll('section[id]');
-const enlaces   = document.querySelectorAll('.nav-link');
+const secciones        = document.querySelectorAll('section[id]');
+const enlaces          = document.querySelectorAll('.nav-link');
+const alturaEncabezado = document.querySelector('.encabezado').offsetHeight;
 
 function marcarEnlaceActivo() {
     let seccionActual = '';
 
     secciones.forEach(function (seccion) {
-        if (window.scrollY >= seccion.offsetTop - 120) {
+        if (window.scrollY >= seccion.offsetTop - alturaEncabezado - 50) {
             seccionActual = seccion.getAttribute('id');
         }
     });
