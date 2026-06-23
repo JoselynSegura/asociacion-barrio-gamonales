@@ -767,17 +767,24 @@ p:last-child { margin-bottom: 0; }
 
 .info-titulo { font-weight: 700; font-size: 0.87rem; color: var(--texto-1); margin-bottom: 0.15rem; }
 
-.info-enlace {
-    color: var(--verde-medio);
-    font-size: 0.9rem;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color var(--transicion);
+/* Ícono como enlace interactivo (único elemento clicable del item) */
+.info-icono-link {
+    display: flex;
+    flex-shrink: 0;
+    border-radius: var(--radio);
+    transition: transform var(--transicion), box-shadow var(--transicion);
 }
 
-.info-enlace:hover,
-.info-enlace:focus-visible {
-    color: var(--verde-oscuro);
+.info-icono-link:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra-hover);
+}
+
+/* Texto informativo no interactivo */
+.info-texto {
+    color: var(--texto-2);
+    font-size: 0.9rem;
+    margin-bottom: 0;
 }
 
 /* Botón CTA principal de contacto */
