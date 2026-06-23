@@ -742,7 +742,7 @@ p:last-child { margin-bottom: 0; }
 .contacto-iconos {
     display: flex;              /* ← FLEXBOX */
     gap: 1rem;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -777,6 +777,29 @@ p:last-child { margin-bottom: 0; }
 
 .contacto-icono-svg {
     font-size: 0;
+}
+
+/* Distribución dos columnas: contenido izquierda + logo derecha */
+.contacto-layout {
+    display: grid;              /* ← CSS GRID */
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+}
+
+.contacto-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contacto-logo {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
 }
 
 /* ---------------------------------------------
@@ -858,6 +881,10 @@ p:last-child { margin-bottom: 0; }
 
     /* Footer: 2 cols → 1 col */
     .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Contacto: grid → 1 col, logo reducido */
+    .contacto-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .contacto-logo   { width: 80px; height: 80px; }
 }
 
 @media (max-width: 480px) {
@@ -885,6 +912,7 @@ p:last-child { margin-bottom: 0; }
 
     .acc-panel   { left: 1rem; right: 1rem; width: auto; }
     .acc-flotante { left: 1rem; }
+    .contacto-logo { width: 64px; height: 64px; }
 }
 
 
