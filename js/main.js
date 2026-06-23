@@ -375,3 +375,24 @@ accMovimiento.addEventListener('click', function () {
 });
 
 sincronizarMovimiento();
+
+
+/* -----------------------------------------------
+   7. NAVBAR — COMPORTAMIENTO EN SCROLL
+   Se expande al estar en el hero; se comprime
+   al salir de la primera sección.
+   ----------------------------------------------- */
+
+const encabezadoEl = document.querySelector('.encabezado');
+const seccionHero  = document.getElementById('inicio');
+
+function actualizarNavbar() {
+    if (window.scrollY >= seccionHero.offsetHeight) {
+        encabezadoEl.classList.add('compacto');
+    } else {
+        encabezadoEl.classList.remove('compacto');
+    }
+}
+
+window.addEventListener('scroll', actualizarNavbar);
+actualizarNavbar();

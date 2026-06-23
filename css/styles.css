@@ -207,9 +207,10 @@ p:last-child { margin-bottom: 0; }
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.7rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     max-width: 1080px;
     margin: 0 auto;
+    transition: padding 0.3s ease;
 }
 
 .nav-logo {
@@ -220,10 +221,11 @@ p:last-child { margin-bottom: 0; }
 }
 
 .nav-logo-img {
-    width: 42px;
-    height: 42px;
+    width: 58px;
+    height: 58px;
     object-fit: contain;
     border-radius: 50%;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .nav-nombre {
@@ -232,6 +234,10 @@ p:last-child { margin-bottom: 0; }
     font-weight: 700;
     color: var(--texto-blanco);
 }
+
+/* Navbar compacto — se activa al salir de la sección hero */
+.encabezado.compacto .navegacion    { padding: 0.7rem 1.5rem; }
+.encabezado.compacto .nav-logo-img  { width: 42px; height: 42px; }
 
 .nav-links {
     display: flex;              /* ← FLEXBOX: enlaces en fila */
