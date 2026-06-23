@@ -77,6 +77,24 @@ img   { max-width: 100%; height: auto; display: block; }
 ul    { list-style: none; }
 a     { text-decoration: none; color: inherit; }
 
+/* Salto de navegación — SC 2.4.1 Nivel A */
+.skip-link {
+    position: absolute;
+    top: -999px;
+    left: 1rem;
+    background: var(--verde-oscuro);
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 0 0 var(--radio) var(--radio);
+    font-weight: 700;
+    font-size: 0.95rem;
+    z-index: 9999;
+    text-decoration: none;
+}
+.skip-link:focus {
+    top: 0;
+}
+
 /* Foco visible — accesibilidad por teclado */
 :focus-visible {
     outline: 3px solid var(--verde-claro);
@@ -855,4 +873,27 @@ p:last-child { margin-bottom: 0; }
     }
 
     .banner-bienvenida { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+
+
+/* =============================================
+   16. PREFERS-REDUCED-MOTION
+   Desactiva transiciones y animaciones cuando
+   el sistema operativo del usuario lo solicita.
+   (Usuarios con trastornos vestibulares, etc.)
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+    .banner-bienvenida {
+        transition: none;
+    }
+    .slider-pausa {
+        display: none; /* Si no hay animación automática, el botón de pausa no aplica */
+    }
 }
