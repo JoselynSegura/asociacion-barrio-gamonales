@@ -739,7 +739,6 @@ p:last-child { margin-bottom: 0; }
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 2.5rem;
 }
 
 .contacto-icono-link {
@@ -773,29 +772,6 @@ p:last-child { margin-bottom: 0; }
 .contacto-icono-svg {
     font-size: 0;
 }
-
-/* Botón CTA principal de contacto */
-.contacto-cta {
-    text-align: center;
-}
-
-.btn-primario-grande {
-    display: inline-block;
-    background-color: var(--verde-oscuro);
-    color: var(--texto-blanco);
-    font-weight: 700;
-    font-size: 1.05rem;
-    padding: 1rem 2.5rem;
-    border-radius: var(--radio-lg);
-    transition: background-color var(--transicion), transform var(--transicion);
-}
-
-.btn-primario-grande:hover,
-.btn-primario-grande:focus-visible {
-    background-color: var(--verde-hover);
-    transform: translateY(-2px);
-}
-
 
 /* ---------------------------------------------
    14. FOOTER — CSS GRID
