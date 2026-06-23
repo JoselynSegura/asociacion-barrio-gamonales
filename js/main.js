@@ -36,50 +36,85 @@ iniciarBanner();
    2. SLIDER DE PROYECTOS
    -----------------------------------------------
    Cada proyecto tiene 2 imágenes que alternan
-   automáticamente cada 5 segundos.
-   El usuario también puede cambiar la imagen
-   haciendo clic en los puntos (dots).
+   automáticamente cada 5 segundos (si el sistema
+   no solicita movimiento reducido).
+   El usuario puede pausar, navegar con dots o
+   con las teclas ← → estando sobre el slider.
    ----------------------------------------------- */
 
 const INTERVALO_SLIDER = 5000; // milisegundos entre cambios
 
 /**
  * Cambia la imagen activa de un slider específico.
- * @param {HTMLElement} slider - el contenedor del slider
- * @param {number}      indice - índice de la imagen a mostrar
+ * Actualiza clase activa y aria-current en los dots.
  */
 function cambiarSlide(slider, indice) {
     const imagenes = slider.querySelectorAll('.proyecto-imagen');
     const dots     = slider.querySelectorAll('.slider-dot');
 
-    // Quitar clase "activa" de la imagen y dot actuales
     imagenes.forEach(function (img) { img.classList.remove('activa'); });
-    dots.forEach(function (dot)     { dot.classList.remove('activo'); });
+    dots.forEach(function (dot) {
+        dot.classList.remove('activo');
+        dot.removeAttribute('aria-current');
+    });
 
-    // Agregar clase "activa" a la imagen y dot del índice indicado
     imagenes[indice].classList.add('activa');
     dots[indice].classList.add('activo');
+    dots[indice].setAttribute('aria-current', 'true');
 }
 
 /**
- * Configura el slider automático y los botones de un proyecto.
- * @param {HTMLElement} slider - el contenedor con data-proyecto
+ * Configura el slider automático, pausa, teclado y dots.
  */
 function configurarSlider(slider) {
-    const imagenes    = slider.querySelectorAll('.proyecto-imagen');
-    const dots        = slider.querySelectorAll('.slider-dot');
-    const totalSlides = imagenes.length;
-    let indiceActual  = 0;
+    const imagenes      = slider.querySelectorAll('.proyecto-imagen');
+    const dots          = slider.querySelectorAll('.slider-dot');
+    const btnPausa      = slider.querySelector('.slider-pausa');
+    const totalSlides   = imagenes.length;
+    let indiceActual    = 0;
     let intervalo;
+    let pausado         = false;
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function iniciarIntervalo() {
         intervalo = setInterval(function () {
-            indiceActual = (indiceActual + 1) % totalSlides; // ciclo: 0 → 1 → 0 → 1...
+            indiceActual = (indiceActual + 1) % totalSlides;
             cambiarSlide(slider, indiceActual);
         }, INTERVALO_SLIDER);
     }
 
-    iniciarIntervalo();
+    // Solo auto-avanza si el usuario no prefiere movimiento reducido
+    if (!sinMovimiento) {
+        iniciarIntervalo();
+    }
+
+    // Pausa / reanuda (SC 2.2.2 Nivel A)
+    if (btnPausa) {
+        btnPausa.addEventListener('click', function () {
+            pausado = !pausado;
+            if (pausado) {
+                clearInterval(intervalo);
+                btnPausa.setAttribute('aria-label', 'Reanudar rotación automática de imágenes');
+                btnPausa.textContent = '▶';
+            } else {
+                iniciarIntervalo();
+                btnPausa.setAttribute('aria-label', 'Pausar rotación automática de imágenes');
+                btnPausa.textContent = '⏸';
+            }
+        });
+    }
+
+    // Navegación con teclado ← → dentro del slider
+    slider.addEventListener('keydown', function (e) {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        e.preventDefault();
+        indiceActual = e.key === 'ArrowRight'
+            ? (indiceActual + 1) % totalSlides
+            : (indiceActual - 1 + totalSlides) % totalSlides;
+        cambiarSlide(slider, indiceActual);
+        clearInterval(intervalo);
+        if (!pausado && !sinMovimiento) iniciarIntervalo();
+    });
 
     // Clic en los dots: cambio manual + reinicio del intervalo automático
     dots.forEach(function (dot) {
@@ -87,7 +122,7 @@ function configurarSlider(slider) {
             indiceActual = parseInt(dot.getAttribute('data-index'), 10);
             cambiarSlide(slider, indiceActual);
             clearInterval(intervalo);
-            iniciarIntervalo();
+            if (!pausado && !sinMovimiento) iniciarIntervalo();
         });
     });
 }

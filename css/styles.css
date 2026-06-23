@@ -573,24 +573,60 @@ p:last-child { margin-bottom: 0; }
     left: 50%;
     transform: translateX(-50%);
     display: flex;              /* ← FLEXBOX */
-    gap: 6px;
+    align-items: center;
+    gap: 2px;
     z-index: 2;
 }
 
+/* Dot: área clicable 24×24px; visual 8×8px via ::after */
 .slider-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transicion);
+    flex-shrink: 0;
+}
+
+.slider-dot::after {
+    content: '';
+    display: block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: rgba(255,255,255,0.55);
-    border: none;
-    cursor: pointer;
-    padding: 0;
     transition: background-color var(--transicion), transform var(--transicion);
 }
 
-.slider-dot.activo {
+.slider-dot.activo::after {
     background: var(--texto-blanco);
     transform: scale(1.25);
+}
+
+/* Botón de pausa del slider — SC 2.2.2 Nivel A */
+.slider-pausa {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    color: var(--texto-blanco);
+    font-size: 0.72rem;
+    padding: 0.1rem 0.3rem;
+    cursor: pointer;
+    line-height: 1;
+    margin-left: 4px;
+    transition: background-color var(--transicion);
+    flex-shrink: 0;
+}
+
+.slider-pausa:hover,
+.slider-pausa:focus-visible {
+    background: rgba(255,255,255,0.32);
 }
 
 .proyecto-cuerpo { padding: 1.25rem 1.5rem; }
