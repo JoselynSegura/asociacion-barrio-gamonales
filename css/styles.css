@@ -15,9 +15,13 @@
    10. Ejes de trabajo         ← CSS GRID (4 cols)
    11. Proyectos + slider      ← CSS GRID (2×2)
    12. Únete y colabora        ← CSS GRID
-   13. Contacto                ← CSS GRID
+   13. Contacto                ← FLEXBOX (íconos)
    14. Footer                  ← CSS GRID
    15. Media queries           ← 768px y 480px
+   16. Botón volver arriba
+   17. Prefers-reduced-motion
+   18. Panel de accesibilidad
+   19. Alto contraste y reducción de movimiento
    ============================================= */
 
 
@@ -720,7 +724,7 @@ p:last-child { margin-bottom: 0; }
 
 
 /* ---------------------------------------------
-   13. CONTACTO — CSS GRID (4 tarjetas)
+   13. CONTACTO — íconos compactos (Flexbox)
    --------------------------------------------- */
 .contacto-intro {
     font-size: 1rem;
@@ -729,62 +733,45 @@ p:last-child { margin-bottom: 0; }
     max-width: 580px;
 }
 
-.contacto-grid {
-    display: grid;              /* ← CSS GRID */
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+.contacto-iconos {
+    display: flex;              /* ← FLEXBOX */
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 2.5rem;
 }
 
-.info-item {
-    display: flex;              /* ← FLEXBOX */
-    align-items: flex-start;
-    gap: 1rem;
-    background-color: var(--verde-suave);
-    border: 1px solid var(--borde);
-    border-radius: var(--radio-lg);
-    padding: 1.25rem;
-}
-
-.info-icono {
-    font-size: 1.3rem;
-    width: 44px;
-    height: 44px;
-    background-color: var(--bg-blanco);
-    border: 1px solid var(--borde);
-    border-radius: var(--radio);
+.contacto-icono-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--verde-suave);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-lg);
+    transition: transform var(--transicion), box-shadow var(--transicion), background-color var(--transicion);
     flex-shrink: 0;
 }
 
-/* El icono de Facebook y WhatsApp no llevan emoji sino SVG */
-.info-icono-facebook,
-.info-icono-whatsapp {
-    font-size: 0;
-}
-
-.info-titulo { font-weight: 700; font-size: 0.87rem; color: var(--texto-1); margin-bottom: 0.15rem; }
-
-/* Ícono como enlace interactivo (único elemento clicable del item) */
-.info-icono-link {
-    display: flex;
-    flex-shrink: 0;
-    border-radius: var(--radio);
-    transition: transform var(--transicion), box-shadow var(--transicion);
-}
-
-.info-icono-link:hover {
-    transform: translateY(-2px);
+.contacto-icono-link:hover,
+.contacto-icono-link:focus-visible {
+    transform: translateY(-3px);
     box-shadow: var(--sombra-hover);
+    background-color: var(--verde-decorativo);
 }
 
-/* Texto informativo no interactivo */
-.info-texto {
-    color: var(--texto-2);
-    font-size: 0.9rem;
-    margin-bottom: 0;
+.contacto-icono {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.contacto-icono-svg {
+    font-size: 0;
 }
 
 /* Botón CTA principal de contacto */
@@ -887,9 +874,6 @@ p:last-child { margin-bottom: 0; }
     .unete-grid { grid-template-columns: 1fr; gap: 2rem; }
     .unete-imagen-wrap { display: none; } /* se oculta la ilustración en tablet/móvil */
 
-    /* Contacto: 2 cols → 1 col */
-    .contacto-grid { grid-template-columns: 1fr; }
-
     /* Footer: 2 cols → 1 col */
     .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
@@ -916,6 +900,9 @@ p:last-child { margin-bottom: 0; }
     }
 
     .banner-bienvenida { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+
+    .acc-panel   { left: 1rem; right: 1rem; width: auto; }
+    .acc-flotante { left: 1rem; }
 }
 
 
@@ -977,4 +964,209 @@ p:last-child { margin-bottom: 0; }
     .slider-pausa {
         display: none; /* Si no hay animación automática, el botón de pausa no aplica */
     }
+}
+
+
+/* ---------------------------------------------
+   18. PANEL DE ACCESIBILIDAD
+   --------------------------------------------- */
+
+.acc-flotante {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--verde-oscuro);
+    color: var(--texto-blanco);
+    border: 2px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: var(--fuente-cuerpo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 150;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: background-color var(--transicion), transform var(--transicion);
+}
+
+.acc-flotante:hover,
+.acc-flotante:focus-visible {
+    background-color: var(--verde-hover);
+    transform: translateY(-2px);
+}
+
+.acc-panel {
+    position: fixed;
+    bottom: 5.5rem;
+    left: 2rem;
+    width: 224px;
+    background-color: var(--bg-blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-hover);
+    z-index: 151;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity var(--transicion), transform var(--transicion);
+}
+
+.acc-panel.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.acc-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.9rem;
+    background-color: var(--verde-oscuro);
+}
+
+.acc-panel-titulo {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--texto-blanco);
+    font-family: var(--fuente-cuerpo);
+}
+
+.acc-panel-cerrar {
+    background: none;
+    border: none;
+    color: var(--texto-blanco);
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    line-height: 1;
+    transition: background-color var(--transicion);
+}
+
+.acc-panel-cerrar:hover,
+.acc-panel-cerrar:focus-visible {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.acc-panel-cuerpo {
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.acc-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.acc-grupo-titulo {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--texto-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0;
+}
+
+.acc-btn {
+    background-color: var(--verde-suave);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    color: var(--texto-1);
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--fuente-cuerpo);
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    min-height: 36px;
+    line-height: 1;
+    transition: background-color var(--transicion), color var(--transicion), border-color var(--transicion);
+}
+
+.acc-btn:hover,
+.acc-btn:focus-visible {
+    background-color: var(--verde-decorativo);
+}
+
+.acc-btn.acc-btn-activo {
+    background-color: var(--verde-oscuro);
+    color: var(--texto-blanco);
+    border-color: var(--verde-oscuro);
+}
+
+.acc-btn.acc-btn-activo:hover,
+.acc-btn.acc-btn-activo:focus-visible {
+    background-color: var(--verde-hover);
+    border-color: var(--verde-hover);
+}
+
+.acc-botones-texto {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.acc-botones-texto .acc-btn {
+    flex: 1;
+    padding: 0.4rem 0;
+}
+
+.acc-btn-ancho {
+    width: 100%;
+    text-align: left;
+    padding-left: 0.65rem;
+}
+
+
+/* ---------------------------------------------
+   19. ALTO CONTRASTE Y REDUCCIÓN DE MOVIMIENTO
+   --------------------------------------------- */
+
+body.alto-contraste {
+    --verde-oscuro:     #003300;
+    --verde-medio:      #005500;
+    --verde-claro:      #00cc44;
+    --verde-hover:      #001a00;
+    --verde-suave:      #e8ffe8;
+    --verde-decorativo: #99ffbb;
+    --bg-pagina:        #ffffff;
+    --bg-blanco:        #ffffff;
+    --bg-footer:        #000000;
+    --texto-1:          #000000;
+    --texto-2:          #111111;
+    --texto-3:          #333333;
+    --texto-blanco:     #ffffff;
+    --borde:            #000000;
+    --borde-suave:      #555555;
+}
+
+body.alto-contraste .hero-overlay {
+    background: rgba(0, 0, 0, 0.95);
+}
+
+body.alto-contraste .acc-btn.acc-btn-activo {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+body.reducir-movimiento *,
+body.reducir-movimiento *::before,
+body.reducir-movimiento *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+}
+
+body.reducir-movimiento .banner-bienvenida {
+    transition: none !important;
+}
+
+body.reducir-movimiento .slider-pausa {
+    display: none;
 }

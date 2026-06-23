@@ -1,3 +1,22 @@
+/* -----------------------------------------------
+   0. PREFERENCIAS DE ACCESIBILIDAD
+   Se aplican antes de inicializar el resto para
+   que el slider y otras animaciones respeten las
+   preferencias guardadas desde el primer frame.
+   ----------------------------------------------- */
+(function () {
+    var escala = localStorage.getItem('asogam-escala');
+    if (escala) document.documentElement.style.fontSize = escala;
+    if (localStorage.getItem('asogam-alto-contraste') === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
+    if (localStorage.getItem('asogam-reducir-animaciones') === 'true') {
+        document.body.classList.add('reducir-movimiento');
+        document.documentElement.style.scrollBehavior = 'auto';
+    }
+}());
+
+
 const banner       = document.getElementById('bannerBienvenida');
 const btnCerrar    = document.getElementById('bannerCerrar');
 
@@ -74,7 +93,8 @@ function configurarSlider(slider) {
     let indiceActual    = 0;
     let intervalo;
     let pausado         = false;
-    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        || document.body.classList.contains('reducir-movimiento');
 
     function iniciarIntervalo() {
         intervalo = setInterval(function () {
@@ -218,3 +238,140 @@ btnArriba.addEventListener('click', function () {
 
 window.addEventListener('scroll', actualizarBtnArriba);
 actualizarBtnArriba();
+
+
+/* -----------------------------------------------
+   6. PANEL DE ACCESIBILIDAD
+   Tamaño de texto, alto contraste y reducción
+   de movimiento. Preferencias guardadas en
+   localStorage.
+   ----------------------------------------------- */
+
+const accFlotante    = document.getElementById('accFlotante');
+const accPanel       = document.getElementById('accPanel');
+const accPanelCerrar = document.getElementById('accPanelCerrar');
+const accContraste   = document.getElementById('accContraste');
+const accMovimiento  = document.getElementById('accMovimiento');
+
+const ESCALAS_TEXTO  = ['75%', '87.5%', '100%', '112.5%', '125%', '137.5%'];
+const ESCALA_DEFAULT = '100%';
+
+function abrirPanel() {
+    accPanel.setAttribute('aria-hidden', 'false');
+    accPanel.classList.add('visible');
+    accFlotante.setAttribute('aria-expanded', 'true');
+    accPanelCerrar.focus();
+}
+
+function cerrarPanel() {
+    accPanel.setAttribute('aria-hidden', 'true');
+    accPanel.classList.remove('visible');
+    accFlotante.setAttribute('aria-expanded', 'false');
+    accFlotante.focus();
+}
+
+accFlotante.addEventListener('click', function () {
+    if (accPanel.getAttribute('aria-hidden') === 'false') {
+        cerrarPanel();
+    } else {
+        abrirPanel();
+    }
+});
+
+accPanelCerrar.addEventListener('click', cerrarPanel);
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && accPanel.getAttribute('aria-hidden') === 'false') {
+        cerrarPanel();
+    }
+});
+
+document.addEventListener('click', function (e) {
+    const dentroDelPanel = accPanel.contains(e.target) || accFlotante.contains(e.target);
+    if (!dentroDelPanel && accPanel.getAttribute('aria-hidden') === 'false') {
+        cerrarPanel();
+    }
+});
+
+accPanel.addEventListener('keydown', function (e) {
+    if (e.key !== 'Tab') return;
+    const focusables = Array.from(accPanel.querySelectorAll('button'));
+    const primero    = focusables[0];
+    const ultimo     = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === primero) {
+        e.preventDefault();
+        ultimo.focus();
+    } else if (!e.shiftKey && document.activeElement === ultimo) {
+        e.preventDefault();
+        primero.focus();
+    }
+});
+
+// --- Tamaño del texto ---
+function obtenerNivelEscala() {
+    const actual = document.documentElement.style.fontSize || ESCALA_DEFAULT;
+    const idx    = ESCALAS_TEXTO.indexOf(actual);
+    return idx >= 0 ? idx : 2;
+}
+
+function aplicarEscala(fontSize) {
+    document.documentElement.style.fontSize = fontSize;
+    if (fontSize === ESCALA_DEFAULT) {
+        localStorage.removeItem('asogam-escala');
+    } else {
+        localStorage.setItem('asogam-escala', fontSize);
+    }
+}
+
+document.getElementById('accTextoAumentar').addEventListener('click', function () {
+    const idx = obtenerNivelEscala();
+    if (idx < ESCALAS_TEXTO.length - 1) aplicarEscala(ESCALAS_TEXTO[idx + 1]);
+});
+
+document.getElementById('accTextoReducir').addEventListener('click', function () {
+    const idx = obtenerNivelEscala();
+    if (idx > 0) aplicarEscala(ESCALAS_TEXTO[idx - 1]);
+});
+
+document.getElementById('accTextoRestablecer').addEventListener('click', function () {
+    aplicarEscala(ESCALA_DEFAULT);
+});
+
+// --- Alto contraste ---
+var altoContraste = document.body.classList.contains('alto-contraste');
+
+function sincronizarContraste() {
+    accContraste.setAttribute('aria-pressed', String(altoContraste));
+    accContraste.classList.toggle('acc-btn-activo', altoContraste);
+    accContraste.setAttribute('aria-label', altoContraste
+        ? 'Desactivar alto contraste' : 'Activar alto contraste');
+}
+
+accContraste.addEventListener('click', function () {
+    altoContraste = !altoContraste;
+    document.body.classList.toggle('alto-contraste', altoContraste);
+    localStorage.setItem('asogam-alto-contraste', String(altoContraste));
+    sincronizarContraste();
+});
+
+sincronizarContraste();
+
+// --- Reducir animaciones ---
+var reducirMovimiento = document.body.classList.contains('reducir-movimiento');
+
+function sincronizarMovimiento() {
+    accMovimiento.setAttribute('aria-pressed', String(reducirMovimiento));
+    accMovimiento.classList.toggle('acc-btn-activo', reducirMovimiento);
+    accMovimiento.setAttribute('aria-label', reducirMovimiento
+        ? 'Reactivar animaciones' : 'Reducir animaciones');
+}
+
+accMovimiento.addEventListener('click', function () {
+    reducirMovimiento = !reducirMovimiento;
+    document.body.classList.toggle('reducir-movimiento', reducirMovimiento);
+    document.documentElement.style.scrollBehavior = reducirMovimiento ? 'auto' : '';
+    localStorage.setItem('asogam-reducir-animaciones', String(reducirMovimiento));
+    sincronizarMovimiento();
+});
+
+sincronizarMovimiento();
