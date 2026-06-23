@@ -818,7 +818,6 @@ p:last-child { margin-bottom: 0; }
     margin-bottom: 2.5rem;
 }
 
-.footer-logo { width: 52px; height: 52px; object-fit: contain; border-radius: 50%; margin-bottom: 0.75rem; }
 .footer-nombre { font-family: var(--fuente-titulo); font-size: 1.15rem; font-weight: 700; color: var(--verde-claro); margin-bottom: 0.5rem; }
 .footer-descripcion { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.55); max-width: 280px; margin-bottom: 0; }
 
