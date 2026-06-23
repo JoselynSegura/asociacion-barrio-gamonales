@@ -912,8 +912,46 @@ p:last-child { margin-bottom: 0; }
 }
 
 
+/* ---------------------------------------------
+   16. BOTÓN VOLVER ARRIBA
+   --------------------------------------------- */
+.btn-arriba {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--verde-oscuro);
+    color: var(--texto-blanco);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transicion), background-color var(--transicion), transform var(--transicion);
+}
+
+.btn-arriba.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.btn-arriba:hover,
+.btn-arriba:focus-visible {
+    background-color: var(--verde-hover);
+    transform: translateY(-2px);
+}
+
+
 /* =============================================
-   16. PREFERS-REDUCED-MOTION
+   17. PREFERS-REDUCED-MOTION
    Desactiva transiciones y animaciones cuando
    el sistema operativo del usuario lo solicita.
    (Usuarios con trastornos vestibulares, etc.)

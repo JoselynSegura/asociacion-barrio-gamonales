@@ -195,3 +195,26 @@ function marcarEnlaceActivo() {
 
 window.addEventListener('scroll', marcarEnlaceActivo);
 marcarEnlaceActivo();
+
+
+/* -----------------------------------------------
+   5. BOTÓN "VOLVER ARRIBA"
+   Aparece al superar 400px de scroll.
+   ----------------------------------------------- */
+
+const btnArriba = document.getElementById('btnArriba');
+
+function actualizarBtnArriba() {
+    if (window.scrollY > 400) {
+        btnArriba.classList.add('visible');
+    } else {
+        btnArriba.classList.remove('visible');
+    }
+}
+
+btnArriba.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', actualizarBtnArriba);
+actualizarBtnArriba();
