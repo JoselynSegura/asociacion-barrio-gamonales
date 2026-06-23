@@ -185,8 +185,10 @@ function marcarEnlaceActivo() {
 
     enlaces.forEach(function (enlace) {
         enlace.classList.remove('activo');
+        enlace.removeAttribute('aria-current');
         if (enlace.getAttribute('href') === '#' + seccionActual) {
             enlace.classList.add('activo');
+            enlace.setAttribute('aria-current', 'true');
         }
     });
 }
