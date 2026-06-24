@@ -905,8 +905,9 @@ p:last-child { margin-bottom: 0; }
     /* Ejes: 4 cols → 2 cols */
     .ejes-grid { grid-template-columns: repeat(2, 1fr); }
 
-    /* Proyectos: carrusel 1 tarjeta visible en tablet */
+    /* Proyectos: carrusel 1 tarjeta visible; botones ocultos (navegación por swipe) */
     .carrusel-pista .proyecto-card { flex: 0 0 100%; }
+    .carrusel-btn { display: none; }
 
     /* Únete: 2 cols → 1 col */
     .unete-grid { grid-template-columns: 1fr; gap: 2rem; }
