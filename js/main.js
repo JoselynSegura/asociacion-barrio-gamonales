@@ -83,45 +83,28 @@ function cambiarSlide(slider, indice) {
 }
 
 /**
- * Configura el slider automático, pausa, teclado y dots.
+ * Configura el auto-avance, teclado y dots del slider de imágenes.
+ * clearInterval antes de cada setInterval evita acumulación de timers.
  */
 function configurarSlider(slider) {
     const imagenes      = slider.querySelectorAll('.proyecto-imagen');
     const dots          = slider.querySelectorAll('.slider-dot');
-    const btnPausa      = slider.querySelector('.slider-pausa');
     const totalSlides   = imagenes.length;
     let indiceActual    = 0;
     let intervalo;
-    let pausado         = false;
     const sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
         || document.body.classList.contains('reducir-movimiento');
 
     function iniciarIntervalo() {
+        clearInterval(intervalo);
         intervalo = setInterval(function () {
             indiceActual = (indiceActual + 1) % totalSlides;
             cambiarSlide(slider, indiceActual);
         }, INTERVALO_SLIDER);
     }
 
-    // Solo auto-avanza si el usuario no prefiere movimiento reducido
     if (!sinMovimiento) {
         iniciarIntervalo();
-    }
-
-    // Pausa / reanuda (SC 2.2.2 Nivel A)
-    if (btnPausa) {
-        btnPausa.addEventListener('click', function () {
-            pausado = !pausado;
-            if (pausado) {
-                clearInterval(intervalo);
-                btnPausa.setAttribute('aria-label', 'Reanudar rotación automática de imágenes');
-                btnPausa.textContent = '▶';
-            } else {
-                iniciarIntervalo();
-                btnPausa.setAttribute('aria-label', 'Pausar rotación automática de imágenes');
-                btnPausa.textContent = '⏸';
-            }
-        });
     }
 
     // Navegación con teclado ← → dentro del slider
@@ -132,17 +115,15 @@ function configurarSlider(slider) {
             ? (indiceActual + 1) % totalSlides
             : (indiceActual - 1 + totalSlides) % totalSlides;
         cambiarSlide(slider, indiceActual);
-        clearInterval(intervalo);
-        if (!pausado && !sinMovimiento) iniciarIntervalo();
+        if (!sinMovimiento) iniciarIntervalo();
     });
 
-    // Clic en los dots: cambio manual + reinicio del intervalo automático
+    // Clic en los dots: cambio manual + reinicio del intervalo
     dots.forEach(function (dot) {
         dot.addEventListener('click', function () {
             indiceActual = parseInt(dot.getAttribute('data-index'), 10);
             cambiarSlide(slider, indiceActual);
-            clearInterval(intervalo);
-            if (!pausado && !sinMovimiento) iniciarIntervalo();
+            if (!sinMovimiento) iniciarIntervalo();
         });
     });
 }
@@ -213,7 +194,7 @@ function marcarEnlaceActivo() {
     });
 }
 
-window.addEventListener('scroll', marcarEnlaceActivo);
+window.addEventListener('scroll', marcarEnlaceActivo, { passive: true });
 marcarEnlaceActivo();
 
 
@@ -236,7 +217,7 @@ btnArriba.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-window.addEventListener('scroll', actualizarBtnArriba);
+window.addEventListener('scroll', actualizarBtnArriba, { passive: true });
 actualizarBtnArriba();
 
 
@@ -381,18 +362,131 @@ sincronizarMovimiento();
    7. NAVBAR — COMPORTAMIENTO EN SCROLL
    Se expande al estar en el hero; se comprime
    al salir de la primera sección.
+
+   La histéresis (60px) evita que el umbral oscile:
+   comprime al llegar al final del hero y expande
+   solo al retroceder 60px por encima de ese punto.
    ----------------------------------------------- */
 
 const encabezadoEl = document.querySelector('.encabezado');
 const seccionHero  = document.getElementById('inicio');
+let navCompacto    = false;
 
 function actualizarNavbar() {
-    if (window.scrollY >= seccionHero.offsetHeight) {
+    const scrollY    = window.scrollY;
+    const alturaHero = seccionHero.offsetHeight;
+
+    if (!navCompacto && scrollY >= alturaHero) {
+        navCompacto = true;
         encabezadoEl.classList.add('compacto');
-    } else {
+    } else if (navCompacto && scrollY < alturaHero - 60) {
+        navCompacto = false;
         encabezadoEl.classList.remove('compacto');
     }
 }
 
-window.addEventListener('scroll', actualizarNavbar);
+window.addEventListener('scroll', actualizarNavbar, { passive: true });
 actualizarNavbar();
+
+
+/* -----------------------------------------------
+   8. CARRUSEL DE PROYECTOS
+   Navegación horizontal con flechas prev/next.
+   Desktop: 2 tarjetas visibles. Tablet/móvil (≤768px): 1.
+   ----------------------------------------------- */
+
+(function () {
+    var pista   = document.querySelector('.carrusel-pista');
+    var btnPrev = document.querySelector('.carrusel-btn-prev');
+    var btnNext = document.querySelector('.carrusel-btn-next');
+
+    if (!pista || !btnPrev || !btnNext) return;
+
+    var cards  = Array.from(pista.querySelectorAll('.proyecto-card'));
+    var indice = 0;
+
+    function columnas() {
+        if (window.innerWidth <= 768) return 1;
+        return 2;
+    }
+
+    function mover() {
+        var cols   = columnas();
+        var maxIdx = Math.max(0, cards.length - cols);
+        if (indice > maxIdx) indice = maxIdx;
+
+        /* Leer el gap real del computed style para no asumir un valor fijo */
+        var cardW = cards[0].getBoundingClientRect().width;
+        var gap   = parseFloat(getComputedStyle(pista).columnGap) || 0;
+
+        pista.style.transform = 'translateX(-' + (indice * (cardW + gap)) + 'px)';
+
+        btnPrev.disabled = indice === 0;
+        btnNext.disabled = indice >= maxIdx;
+    }
+
+    /* Auto-avance cada 5 s; reinicia el timer si el usuario interactúa */
+    var intervaloCarrusel;
+    var sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        || document.body.classList.contains('reducir-movimiento');
+
+    function iniciarAutoAvance() {
+        clearInterval(intervaloCarrusel);
+        if (sinMovimiento) return;
+        intervaloCarrusel = setInterval(function () {
+            var paso   = columnas();
+            var maxIdx = Math.max(0, cards.length - paso);
+            indice = indice < maxIdx ? indice + paso : 0; /* vuelve al inicio al llegar al final */
+            mover();
+        }, 10000);
+    }
+
+    /* Navega de a un bloque completo (paso = columnas visibles) */
+    btnPrev.addEventListener('click', function () {
+        var paso = columnas();
+        if (indice > 0) { indice = Math.max(0, indice - paso); mover(); iniciarAutoAvance(); }
+    });
+
+    btnNext.addEventListener('click', function () {
+        var paso   = columnas();
+        var maxIdx = Math.max(0, cards.length - paso);
+        if (indice < maxIdx) { indice = Math.min(indice + paso, maxIdx); mover(); iniciarAutoAvance(); }
+    });
+
+    /* Al redimensionar, recalcular posición y límites */
+    window.addEventListener('resize', mover, { passive: true });
+
+    /* Soporte swipe táctil */
+    var viewport     = document.querySelector('.carrusel-viewport');
+    var touchInicioX = 0;
+    var touchInicioY = 0;
+
+    viewport.addEventListener('touchstart', function (e) {
+        touchInicioX = e.touches[0].clientX;
+        touchInicioY = e.touches[0].clientY;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', function (e) {
+        var deltaX = e.changedTouches[0].clientX - touchInicioX;
+        var deltaY = e.changedTouches[0].clientY - touchInicioY;
+
+        /* Ignorar si el gesto fue más vertical que horizontal o muy corto */
+        if (Math.abs(deltaX) < 50 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        var paso   = columnas();
+        var maxIdx = Math.max(0, cards.length - paso);
+
+        if (deltaX < 0 && indice < maxIdx) {
+            indice = Math.min(indice + paso, maxIdx);
+            mover();
+            iniciarAutoAvance();
+        } else if (deltaX > 0 && indice > 0) {
+            indice = Math.max(0, indice - paso);
+            mover();
+            iniciarAutoAvance();
+        }
+    }, { passive: true });
+
+    mover();
+    iniciarAutoAvance();
+}());
