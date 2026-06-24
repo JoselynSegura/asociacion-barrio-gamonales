@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/logo.png">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -177,7 +178,7 @@
 
 
         <!-- -------------------------------------------
-             SECCIÓN 4: Proyectos — CSS Grid 2×2
+             SECCIÓN 4: Proyectos — Carrusel horizontal
              Cada card tiene 2 imágenes con mini-slider
              ------------------------------------------- -->
         <section id="proyectos" class="seccion" aria-labelledby="titulo-proyectos">
@@ -185,103 +186,120 @@
                 <span class="etiqueta-seccion">Proyectos</span>
                 <h2 id="titulo-proyectos">Lo que hemos logrado juntos</h2>
 
-                <div class="proyectos-grid">
+                <div class="carrusel-proyectos">
 
-                    <!-- Proyecto 1: Cámara de Vigilancia -->
-                    <article class="proyecto-card">
-                        <div class="proyecto-slider" data-proyecto="0">
-                            <div class="proyecto-imagenes">
-                                <img src="img/proyecto_1.jpeg"
-                                     alt="Instalación de cámara de vigilancia en Gamonales"
-                                     class="proyecto-imagen activa" loading="lazy">
-                                <img src="img/proyecto_1_2.jpeg"
-                                     alt="Vista de la cámara de vigilancia instalada"
-                                     class="proyecto-imagen" loading="lazy">
-                            </div>
-                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
-                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
-                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
-                                <button class="slider-pausa" aria-label="Pausar rotación automática de imágenes">⏸</button>
-                            </div>
-                        </div>
-                        <div class="proyecto-cuerpo">
-                            <span class="proyecto-etiqueta etiqueta-seguridad">Seguridad</span>
-                            <h3 class="proyecto-titulo">Cámara de Vigilancia</h3>
-                            <p class="proyecto-descripcion">Se instaló un sistema de cámaras de vigilancia para fortalecer la seguridad y brindar mayor tranquilidad a los vecinos de la comunidad.</p>
-                        </div>
-                    </article>
+                    <button class="carrusel-btn carrusel-btn-prev"
+                            aria-label="Ver proyecto anterior"
+                            disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
 
-                    <!-- Proyecto 2: Parquecito -->
-                    <article class="proyecto-card">
-                        <div class="proyecto-slider" data-proyecto="1">
-                            <div class="proyecto-imagenes">
-                                <img src="img/proyecto_2.jpeg"
-                                     alt="Parquecito recreativo con juegos infantiles en Gamonales"
-                                     class="proyecto-imagen activa" loading="lazy">
-                                <img src="img/proyecto_2_2.jpeg"
-                                     alt="Anuncio de reapertura del parquecito de Gamonales"
-                                     class="proyecto-imagen" loading="lazy">
-                            </div>
-                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
-                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
-                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
-                                <button class="slider-pausa" aria-label="Pausar rotación automática de imágenes">⏸</button>
-                            </div>
-                        </div>
-                        <div class="proyecto-cuerpo">
-                            <span class="proyecto-etiqueta etiqueta-recreacion">Recreación</span>
-                            <h3 class="proyecto-titulo">Parquecito</h3>
-                            <p class="proyecto-descripcion">Se desarrolló y acondicionó un espacio recreativo para el disfrute de niños y familias, contribuyendo a una comunidad más agradable y segura.</p>
-                        </div>
-                    </article>
+                    <div class="carrusel-viewport">
+                        <div class="carrusel-pista">
 
-                    <!-- Proyecto 3: Rotulación -->
-                    <article class="proyecto-card">
-                        <div class="proyecto-slider" data-proyecto="2">
-                            <div class="proyecto-imagenes">
-                                <img src="img/proyecto_3.jpeg"
-                                     alt="Rótulo de bienvenida al barrio Gamonales"
-                                     class="proyecto-imagen activa" loading="lazy">
-                                <img src="img/proyecto_3_2.jpeg"
-                                     alt="Rotulación de sectores del barrio: Los Maderos y La Hacienda"
-                                     class="proyecto-imagen" loading="lazy">
-                            </div>
-                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
-                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
-                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
-                                <button class="slider-pausa" aria-label="Pausar rotación automática de imágenes">⏸</button>
-                            </div>
-                        </div>
-                        <div class="proyecto-cuerpo">
-                            <span class="proyecto-etiqueta etiqueta-infraestructura">Infraestructura</span>
-                            <h3 class="proyecto-titulo">Rotulación</h3>
-                            <p class="proyecto-descripcion">Se implementó la rotulación de la comunidad y sus diferentes sectores, facilitando la identificación y ubicación de sus espacios.</p>
-                        </div>
-                    </article>
+                            <!-- Proyecto 1: Cámara de Vigilancia -->
+                            <article class="proyecto-card">
+                                <div class="proyecto-slider" data-proyecto="0">
+                                    <div class="proyecto-imagenes">
+                                        <img src="img/proyecto_1.jpeg"
+                                             alt="Instalación de cámara de vigilancia en Gamonales"
+                                             class="proyecto-imagen activa" loading="lazy">
+                                        <img src="img/proyecto_1_2.jpeg"
+                                             alt="Vista de la cámara de vigilancia instalada"
+                                             class="proyecto-imagen" loading="lazy">
+                                    </div>
+                                    <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                        <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                        <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                                    </div>
+                                </div>
+                                <div class="proyecto-cuerpo">
+                                    <span class="proyecto-etiqueta etiqueta-seguridad">Seguridad</span>
+                                    <h3 class="proyecto-titulo">Cámara de Vigilancia</h3>
+                                    <p class="proyecto-descripcion">Se instaló un sistema de cámaras de vigilancia para fortalecer la seguridad y brindar mayor tranquilidad a los vecinos de la comunidad.</p>
+                                </div>
+                            </article>
 
-                    <!-- Proyecto 4: Edificio Comunal -->
-                    <article class="proyecto-card">
-                        <div class="proyecto-slider" data-proyecto="3">
-                            <div class="proyecto-imagenes">
-                                <img src="img/proyecto_4.jpg"
-                                     alt="Edificio comunal de ASOGAM en Gamonales"
-                                     class="proyecto-imagen activa" loading="lazy">
-                                <img src="img/proyecto_4_2.png"
-                                     alt="Vista frontal del edificio comunal de la asociación"
-                                     class="proyecto-imagen" loading="lazy">
-                            </div>
-                            <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
-                                <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
-                                <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
-                                <button class="slider-pausa" aria-label="Pausar rotación automática de imágenes">⏸</button>
-                            </div>
+                            <!-- Proyecto 2: Parquecito -->
+                            <article class="proyecto-card">
+                                <div class="proyecto-slider" data-proyecto="1">
+                                    <div class="proyecto-imagenes">
+                                        <img src="img/proyecto_2.jpeg"
+                                             alt="Parquecito recreativo con juegos infantiles en Gamonales"
+                                             class="proyecto-imagen activa" loading="lazy">
+                                        <img src="img/proyecto_2_2.jpeg"
+                                             alt="Anuncio de reapertura del parquecito de Gamonales"
+                                             class="proyecto-imagen" loading="lazy">
+                                    </div>
+                                    <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                        <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                        <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                                    </div>
+                                </div>
+                                <div class="proyecto-cuerpo">
+                                    <span class="proyecto-etiqueta etiqueta-recreacion">Recreación</span>
+                                    <h3 class="proyecto-titulo">Parquecito</h3>
+                                    <p class="proyecto-descripcion">Se desarrolló y acondicionó un espacio recreativo para el disfrute de niños y familias, contribuyendo a una comunidad más agradable y segura.</p>
+                                </div>
+                            </article>
+
+                            <!-- Proyecto 3: Rotulación -->
+                            <article class="proyecto-card">
+                                <div class="proyecto-slider" data-proyecto="2">
+                                    <div class="proyecto-imagenes">
+                                        <img src="img/proyecto_3.jpeg"
+                                             alt="Rótulo de bienvenida al barrio Gamonales"
+                                             class="proyecto-imagen activa" loading="lazy">
+                                        <img src="img/proyecto_3_2.jpeg"
+                                             alt="Rotulación de sectores del barrio: Los Maderos y La Hacienda"
+                                             class="proyecto-imagen" loading="lazy">
+                                    </div>
+                                    <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                        <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                        <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                                    </div>
+                                </div>
+                                <div class="proyecto-cuerpo">
+                                    <span class="proyecto-etiqueta etiqueta-infraestructura">Infraestructura</span>
+                                    <h3 class="proyecto-titulo">Rotulación</h3>
+                                    <p class="proyecto-descripcion">Se implementó la rotulación de la comunidad y sus diferentes sectores, facilitando la identificación y ubicación de sus espacios.</p>
+                                </div>
+                            </article>
+
+                            <!-- Proyecto 4: Edificio Comunal -->
+                            <article class="proyecto-card">
+                                <div class="proyecto-slider" data-proyecto="3">
+                                    <div class="proyecto-imagenes">
+                                        <img src="img/proyecto_4.jpg"
+                                             alt="Edificio comunal de ASOGAM en Gamonales"
+                                             class="proyecto-imagen activa" loading="lazy">
+                                        <img src="img/proyecto_4_2.png"
+                                             alt="Vista frontal del edificio comunal de la asociación"
+                                             class="proyecto-imagen" loading="lazy">
+                                    </div>
+                                    <div class="slider-dots" aria-label="Navegación de imágenes del proyecto">
+                                        <button class="slider-dot activo" data-index="0" aria-label="Ver imagen 1"></button>
+                                        <button class="slider-dot"         data-index="1" aria-label="Ver imagen 2"></button>
+                                    </div>
+                                </div>
+                                <div class="proyecto-cuerpo">
+                                    <span class="proyecto-etiqueta etiqueta-comunal">Comunal</span>
+                                    <h3 class="proyecto-titulo">Edificio Comunal</h3>
+                                    <p class="proyecto-descripcion">Se adquirió un edificio comunal destinado a reuniones, actividades y proyectos en beneficio de toda la comunidad.</p>
+                                </div>
+                            </article>
+
                         </div>
-                        <div class="proyecto-cuerpo">
-                            <span class="proyecto-etiqueta etiqueta-comunal">Comunal</span>
-                            <h3 class="proyecto-titulo">Edificio Comunal</h3>
-                            <p class="proyecto-descripcion">Se adquirió un edificio comunal destinado a reuniones, actividades y proyectos en beneficio de toda la comunidad.</p>
-                        </div>
-                    </article>
+                    </div>
+
+                    <button class="carrusel-btn carrusel-btn-next"
+                            aria-label="Ver proyecto siguiente">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+                            <path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
 
                 </div>
             </div>
@@ -405,7 +423,7 @@
                         <img src="img/logo.png"
                              alt="Logo de ASOGAM, Asociación de Desarrollo Integral de Gamonales"
                              class="contacto-logo"
-                             width="160" height="160"
+                             width="240" height="240"
                              loading="lazy">
                     </div>
 
