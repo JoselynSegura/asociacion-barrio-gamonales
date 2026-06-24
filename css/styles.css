@@ -905,9 +905,25 @@ p:last-child { margin-bottom: 0; }
     /* Ejes: 4 cols → 2 cols */
     .ejes-grid { grid-template-columns: repeat(2, 1fr); }
 
-    /* Proyectos: carrusel 1 tarjeta visible; botones ocultos (navegación por swipe) */
+    /* Proyectos: 1 tarjeta visible; botones superpuestos sobre la imagen */
     .carrusel-pista .proyecto-card { flex: 0 0 100%; }
-    .carrusel-btn { display: none; }
+    .carrusel-proyectos            { position: relative; }
+    .carrusel-btn {
+        position: absolute;
+        top: 145px;                          /* centro vertical de imagen 290px */
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 34px;
+        height: 34px;
+        background-color: rgba(0, 0, 0, 0.32);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--texto-blanco);
+        box-shadow: none;
+    }
+    .carrusel-btn-prev { left:  0.5rem; }
+    .carrusel-btn-next { right: 0.5rem; }
+    /* Ocultar completamente cuando está deshabilitado */
+    .carrusel-btn:disabled { opacity: 0; pointer-events: none; }
 
     /* Únete: 2 cols → 1 col */
     .unete-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -936,6 +952,8 @@ p:last-child { margin-bottom: 0; }
 
     .img-comunidad { height: 220px; }
     .proyecto-imagenes { height: 190px; }
+    /* Recentrar flechas sobre imagen de 190px */
+    .carrusel-btn { top: 95px; }
 
     /* Cuadro decorativo mínimo en móvil pequeño */
     .quienes-imagen-wrap::before {
