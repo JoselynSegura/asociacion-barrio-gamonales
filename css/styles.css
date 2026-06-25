@@ -106,6 +106,12 @@ a     { text-decoration: none; color: inherit; }
     border-radius: 4px;
 }
 
+section:focus-visible{
+    outline:        3px solid var(--verde-oscuro);
+    outline-offset: 4px;
+    border-radius:  4px;
+}
+
 
 /* ---------------------------------------------
    3. CONTENEDOR
@@ -307,6 +313,9 @@ p:last-child { margin-bottom: 0; }
 .seccion       { padding: 5rem 0; background-color: var(--bg-blanco); }
 .seccion-verde { background-color: var(--verde-suave); }
 
+/* Deja espacio para el header sticky al navegar con anchor links */
+section[id] { scroll-margin-top: 80px; }
+
 
 /* ---------------------------------------------
    8. HERO — FLEXBOX
@@ -478,6 +487,7 @@ p:last-child { margin-bottom: 0; }
     border-radius: var(--radio-lg);
     transform: rotate(-9deg) translateX(-22px); /* más inclinado y desplazado a la izquierda */
     z-index: 0;                 /* queda detrás de la imagen */
+    pointer-events: none;       /* no intercepta taps ni clics */
 }
 
 .img-comunidad {
